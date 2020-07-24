@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head th:include="fragments/header.html">
+</head>
+<body>
+    <th:block layout:fragment="script">
+        <script type="text/javascript" th:src="@{/static/js/reservedDramas.js}"></script>
+    </th:block>
+
+    <div class="container-fluid">
+        <div th:replace="fragments/navigation.html"></div>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Drama Name</th>
+                    <th scope="col">First Airing Date</th>
+                    <th scope="col">선택</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reservedDrama: ${reservedDramas}">
+                    <td th:text="${reservedDrama.name}"></td>
+                    <td th:text="${reservedDrama.firstAiringDate}"></td>
+                    <td>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" th:value="${reservedDrama.id}">
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" onclick="requestRemove()">예약 목록에서 삭제하기</button>
+            <button type="button" class="btn btn-secondary" onclick="requestRegisterToWatched()">이미 본 드라마에 등록하기</button>
+        </div>
+    </div>
+</body>
+</html>

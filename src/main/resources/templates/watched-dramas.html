@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head th:include="fragments/header.html">
+</head>
+<body>
+    <th:block layout:fragment="script">
+        <script type="text/javascript" th:src="@{/static/js/watchedDramas.js}"></script>
+    </th:block>
+
+    <div class="container-fluid">
+        <div th:replace="fragments/navigation.html"></div>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Drama Name</th>
+                    <th scope="col">First Airing Date</th>
+                    <th scope="col">Last Watched Season</th>
+                    <th scope="col">선택</th>
+                    <th scope="col">수정하기</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="watchedDrama: ${watchedDramas}">
+                    <td th:text="${watchedDrama.get('name')}"></td>
+                    <td th:text="${watchedDrama.get('first_airing_date')}"></td>
+                    <td th:text="${watchedDrama.get('last_watched_season')}"></td>
+                    <td>
+                        <button type="button" class="btn btn-outline-secondary" th:onclick="redirect([[${watchedDrama.get('id')}]]);">변경</button>
+                    </td>
+                    <td>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" th:value="${watchedDrama.get('id')}">
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary" onclick="requestRemove()">본 목록에서 삭제하기</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org/">
+<head th:include="fragments/header.html">
+</head>
+    <body>
+        <th:block layout:fragment="script">
+            <script type="text/javascript" th:src="@{/static/js/watchedDrama.js}"></script>
+        </th:block>
+
+        <form>
+            <div class="form-group">
+                <label for="nameInput">드라마 이름</label>
+                <input type="text" class="form-control" id="nameInput" aria-describedby="name" th:value="${watchedDrama.get('name')}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="firstAiringDateInput">첫 방영일</label>
+                <input type="date" class="form-control" id="firstAiringDateInput" aria-describedby="firstAiringDate" th:value="${watchedDrama.get('first_airing_date')}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="lastWatchedSeasonInput">마지막으로 본 시즌</label>
+                <input type="text" class="form-control" id="lastWatchedSeasonInput" aria-describedby="lastWatchedSeason" th:value="${watchedDrama.get('last_watched_season')}">
+            </div>
+
+            <button type="submit" class="btn btn-primary" th:onclick="requestUpdate([[${watchedDrama.get('id')}]]);">변경하기</button>
+        </form>
+    </body>
+</html>
